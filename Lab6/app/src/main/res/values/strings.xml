@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Lab6</string>
+    <string name="app_name">Lab5-1</string>
+    <string name="editNom">Nom</string>
+    <string name="editEmail">Courriel</string>
+    <string name="Annuler">Annuler</string>
+    <string name="Ajouter">Ajouter</string>
 </resources>
