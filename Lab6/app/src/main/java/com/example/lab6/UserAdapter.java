@@ -12,18 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class UserAdapter extends ListAdapter<Item, UserAdapter.ViewHolder> {
-    private final RecyclerCallback<Item> callback;
-    ArrayList<Item> users;
+public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
+    private final RecyclerCallback<User> callback;
+    ArrayList<User> users;
 
-    public UserAdapter(ArrayList<Item> users) {
-        super(new DiffUtil.ItemCallback<Item>() {
+    public UserAdapter(ArrayList<User> users) {
+        super(new DiffUtil.ItemCallback<User>() {
             @Override
-            public boolean areItemsTheSame(Item oldUser, Item newUser) {
+            public boolean areItemsTheSame(User oldUser, User newUser) {
                 return oldUser == newUser;
             }
             @Override
-            public boolean areContentsTheSame(Item oldUser, Item newUser) {
+            public boolean areContentsTheSame(User oldUser, User newUser) {
                 return oldUser.getNom().equals(newUser.getNom()) && oldUser.getEmail().equals(newUser.getEmail());
             }
         });
@@ -48,23 +48,23 @@ class UserAdapter extends ListAdapter<Item, UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView nom;
         private final TextView email;
-        Item user;
+        User user;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(view -> {
                 System.out.println("bouton cliqué");
                 users.remove(user);
-                submitList(new ArrayList<Item>(users));
+                submitList(new ArrayList<User>(users));
             });
             nom = itemView.findViewById(R.id.nom);
             email = itemView.findViewById(R.id.email);
         }
 
-        public void setItem(Item item) {
-            nom.setText(item.getNom());
-            email.setText(item.getEmail());
-            this.user = item;
+        public void setItem(User user) {
+            nom.setText(user.getNom());
+            email.setText(user.getEmail());
+            this.user = user;
         }
     }
 }
