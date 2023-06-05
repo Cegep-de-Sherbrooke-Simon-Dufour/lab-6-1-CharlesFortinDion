@@ -7,7 +7,7 @@ import java.util.List;
 public class repositoryDemo {
     @Inject
     public repositoryDemo {
-
+        //
     }
     private ArrayList<Item> animals = new ArrayList<>();
 
