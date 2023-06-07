@@ -37,8 +37,9 @@ public class UserListFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        UserAdapter adapter = new UserAdapter(viewModelUser.getUsers().getValue());
+        UserAdapter adapter = new UserAdapter();
         recyclerView.setAdapter(adapter);
+        adapter.setCallback(viewModelUser::deleteUser);
 
         FloatingActionButton addButton = view.findViewById(R.id.addButton);
         addButton.setOnClickListener(v -> {

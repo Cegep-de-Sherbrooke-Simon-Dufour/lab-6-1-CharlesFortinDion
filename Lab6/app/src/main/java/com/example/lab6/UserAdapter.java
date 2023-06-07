@@ -13,22 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
-    private final RecyclerCallback<User> callback;
-    ArrayList<User> users;
+    RecyclerCallback<User> callback = (u) -> {};
 
-    public UserAdapter(ArrayList<User> users) {
+    public void setCallback(RecyclerCallback<User> callback) {
+        this.callback = callback;
+    }
+
+    protected UserAdapter() {
         super(new DiffUtil.ItemCallback<User>() {
             @Override
-            public boolean areItemsTheSame(User oldUser, User newUser) {
+            public boolean areItemsTheSame(@NonNull User oldUser, @NonNull User newUser) {
                 return oldUser == newUser;
             }
             @Override
-            public boolean areContentsTheSame(User oldUser, User newUser) {
+            public boolean areContentsTheSame(@NonNull User oldUser, @NonNull User newUser) {
                 return oldUser.getNom().equals(newUser.getNom()) && oldUser.getEmail().equals(newUser.getEmail());
             }
         });
-        callback = null;
-        this.users = users;
     }
 
     @NonNull
@@ -42,23 +43,20 @@ public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setItem(getItem(position));
-        System.out.println("binding stuff");
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView nom;
         private final TextView email;
-        User user;
+        private User user;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(view -> {
-                System.out.println("bouton cliqué");
-                users.remove(user);
-                submitList(new ArrayList<User>(users));
-            });
             nom = itemView.findViewById(R.id.nom);
             email = itemView.findViewById(R.id.email);
+            itemView.setOnClickListener(view -> {
+                callback.onClick(user);
+            });
         }
 
         public void setItem(User user) {

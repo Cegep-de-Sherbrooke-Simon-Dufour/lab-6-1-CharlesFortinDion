@@ -37,7 +37,10 @@ public class CreateUserFragment extends Fragment {
             viewModelUser.addUser(nom.getText().toString(), email.getText().toString());
             Navigation.findNavController(view).navigateUp();
         });
-        //Button annulerButton = view.findViewById(R.id.annulerCreate);
-        //annulerButton.setOnClickListener(annulerAjout);
+
+        Button annulerButton = view.findViewById(R.id.annulerCreate);
+        annulerButton.setOnClickListener(v -> {
+            Navigation.findNavController(view).navigateUp();
+        });
     }
 }
