@@ -11,6 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,49 +25,28 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-    private ViewModelUser viewModelUser;
+    //private ViewModelUser viewModelUser;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewModelUser = new ViewModelProvider(this).get(ViewModelUser.class);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        UserAdapter adapter = new UserAdapter(viewModelUser.getUsers().getValue());
-        recyclerView.setAdapter(adapter);
+        NavHostFragment navHostFragment = (NavHostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+        }
+        NavigationUI.setupActionBarWithNavController(this, navController);
 
-        FloatingActionButton addButton = findViewById(R.id.addButton);
-        addButton.setOnClickListener(ajouterUser);
-
-        viewModelUser.getUsers().observe(this, new Observer<ArrayList<User>>() {
-            @Override
-            public void onChanged(ArrayList<User> users) {
-                adapter.submitList(users);
-            }
-        });
     }
 
-    ActivityResultLauncher<Intent> getNewUser = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult> () {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    Intent data = result.getData();
-                    if (result.getResultCode() != 0) {
-                        viewModelUser.addUser(data.getStringExtra("nom"), data.getStringExtra("email"));
-                    }
-        }
+    @Override
+    public boolean onSupportNavigateUp() {
+        navController.navigateUp();
+        return super.onSupportNavigateUp();
     }
-    );
-
-    View.OnClickListener ajouterUser = new View.OnClickListener () {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, CreateUser.class);
-            getNewUser.launch(intent);
-        }
-    };
 }
