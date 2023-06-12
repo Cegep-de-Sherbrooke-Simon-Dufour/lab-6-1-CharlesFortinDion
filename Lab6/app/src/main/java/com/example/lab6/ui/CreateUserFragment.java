@@ -1,6 +1,5 @@
-package com.example.lab6;
+package com.example.lab6.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.lab6.R;
 
 public class CreateUserFragment extends Fragment {
 
