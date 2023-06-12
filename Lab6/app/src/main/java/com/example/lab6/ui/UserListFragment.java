@@ -1,6 +1,5 @@
-package com.example.lab6;
+package com.example.lab6.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,9 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.lab6.R;
+import com.example.lab6.data.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserListFragment extends Fragment {
 
@@ -46,9 +48,9 @@ public class UserListFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_userListFragment_to_createUserFragment);
         });
 
-        viewModelUser.getUsers().observe(getViewLifecycleOwner(), new Observer<ArrayList<User>>() {
+        viewModelUser.getUsers().observe(getViewLifecycleOwner(), new Observer<List<User>>() {
             @Override
-            public void onChanged(ArrayList<User> users) {
+            public void onChanged(List<User> users) {
                 adapter.submitList(users);
             }
         });

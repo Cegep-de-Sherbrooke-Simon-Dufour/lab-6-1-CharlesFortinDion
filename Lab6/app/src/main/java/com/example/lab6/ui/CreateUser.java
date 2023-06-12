@@ -1,4 +1,4 @@
-package com.example.lab6;
+package com.example.lab6.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.lab6.R;
 
 public class CreateUser extends AppCompatActivity {
 

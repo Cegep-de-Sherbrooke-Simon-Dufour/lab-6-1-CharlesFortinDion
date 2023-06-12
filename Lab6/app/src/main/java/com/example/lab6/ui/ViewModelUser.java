@@ -1,7 +1,10 @@
-package com.example.lab6;
+package com.example.lab6.ui;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.lab6.data.RepositoryUser;
+import com.example.lab6.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,7 @@ public class ViewModelUser extends ViewModel {
         repository.deleteUser(user);
     }
 
-    public LiveData<ArrayList<User>> getUsers() {
+    public LiveData<List<User>> getUsers() {
         return repository.getUsers();
     }
 }

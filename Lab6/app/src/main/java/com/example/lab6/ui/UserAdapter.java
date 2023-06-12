@@ -1,4 +1,4 @@
-package com.example.lab6;
+package com.example.lab6.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.lab6.R;
+import com.example.lab6.data.User;
 
 public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
     RecyclerCallback<User> callback = (u) -> {};
