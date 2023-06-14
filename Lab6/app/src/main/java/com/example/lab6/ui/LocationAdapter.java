@@ -11,24 +11,24 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lab6.R;
-import com.example.lab6.data.User;
+import com.example.lab6.data.Location;
 
-public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
-    RecyclerCallback<User> callback = (u) -> {};
+public class LocationAdapter extends ListAdapter<Location, LocationAdapter.ViewHolder> {
+    RecyclerCallback<Location> callback = (u) -> {};
 
-    public void setCallback(RecyclerCallback<User> callback) {
+    public void setCallback(RecyclerCallback<Location> callback) {
         this.callback = callback;
     }
 
-    protected UserAdapter() {
-        super(new DiffUtil.ItemCallback<User>() {
+    protected LocationAdapter() {
+        super(new DiffUtil.ItemCallback<Location>() {
             @Override
-            public boolean areItemsTheSame(@NonNull User oldUser, @NonNull User newUser) {
-                return oldUser == newUser;
+            public boolean areItemsTheSame(@NonNull Location oldLocation, @NonNull Location newLocation) {
+                return oldLocation == newLocation;
             }
             @Override
-            public boolean areContentsTheSame(@NonNull User oldUser, @NonNull User newUser) {
-                return oldUser.getNom().equals(newUser.getNom()) && oldUser.getEmail().equals(newUser.getEmail());
+            public boolean areContentsTheSame(@NonNull Location oldLocation, @NonNull Location newLocation) {
+                return oldLocation.getName().equals(newLocation.getName());
             }
         });
     }
@@ -48,22 +48,19 @@ public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView nom;
-        private final TextView email;
-        private User user;
+        private Location location;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nom = itemView.findViewById(R.id.nomLocation);
-            email = itemView.findViewById(R.id.email);
             itemView.setOnClickListener(view -> {
-                callback.onClick(user);
+                callback.onClick(location);
             });
         }
 
-        public void setItem(User user) {
-            nom.setText(user.getNom());
-            email.setText(user.getEmail());
-            this.user = user;
+        public void setItem(Location location) {
+            nom.setText(location.getName());
+            this.location = location;
         }
     }
 }

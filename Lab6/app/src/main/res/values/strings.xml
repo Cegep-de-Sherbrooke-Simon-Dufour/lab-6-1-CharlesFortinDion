@@ -4,6 +4,8 @@
     <string name="editEmail">Courriel</string>
     <string name="Annuler">Annuler</string>
     <string name="Ajouter">Ajouter</string>
+    <string name="Supprimer">Supprimer</string>
+    <string name="Nom">Nom</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

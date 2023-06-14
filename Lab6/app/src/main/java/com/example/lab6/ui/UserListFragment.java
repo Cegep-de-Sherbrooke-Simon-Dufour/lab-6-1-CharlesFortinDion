@@ -42,6 +42,11 @@ public class UserListFragment extends Fragment {
         UserAdapter adapter = new UserAdapter();
         recyclerView.setAdapter(adapter);
         adapter.setCallback(viewModelUser::deleteUser);
+        adapter.setCallback((user) -> {
+            Bundle bundle = new Bundle();
+            bundle.putLong("userId", user.getUserId());
+            Navigation.findNavController(view).navigate(R.id.action_userListFragment_to_locationListFragment, bundle);
+        });
 
         FloatingActionButton addButton = view.findViewById(R.id.addButton);
         addButton.setOnClickListener(v -> {

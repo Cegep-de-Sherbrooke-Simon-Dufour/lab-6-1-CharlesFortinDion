@@ -3,6 +3,7 @@ package com.example.lab6.ui;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.lab6.data.Location;
 import com.example.lab6.data.RepositoryUser;
 import com.example.lab6.data.User;
 
@@ -31,4 +32,15 @@ public class ViewModelUser extends ViewModel {
     public LiveData<List<User>> getUsers() {
         return repository.getUsers();
     }
+
+    public User getUser(int key) {
+        return repository.getUser(key);
+    }
+    public LiveData<List<Location>> getLocations() { return repository.getLocations(); }
+    // à completer
+    public void addLocation(String nom, int userId) { repository.addLocation(new Location(nom, 1));}
+    public void deleteLocation(Location location) {
+        repository.deleteLocation(location);
+    }
+
 }

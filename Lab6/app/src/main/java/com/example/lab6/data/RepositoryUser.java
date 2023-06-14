@@ -15,11 +15,13 @@ import javax.inject.Singleton;
 public class RepositoryUser {
     private final UserDao userDao;
     private final LiveData<List<User>> users;
+    private final LiveData<List<Location>> locations;
 
     @Inject
     public RepositoryUser (UserDatabase userDatabase){
         userDao = userDatabase.getDao();
         users = userDao.getAll();
+        locations = userDao.getLocations();
     }
 
     public void addUser(User user) {
@@ -36,5 +38,25 @@ public class RepositoryUser {
 
     public LiveData<List<User>> getUsers() {
         return users;
+    }
+
+    public User getUser(int key) {
+        User user;
+        Executors.newSingleThreadExecutor().execute(() -> {
+            return userDao.getUser(key);}
+        });
+
+    public LiveData<List<Location>> getLocations() {return locations;}
+
+    public void addLocation(Location location) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            userDao.addLocation(location);
+        });
+    }
+
+    public void deleteLocation(Location location) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            userDao.deleteLocation(location);
+        });
     }
 }

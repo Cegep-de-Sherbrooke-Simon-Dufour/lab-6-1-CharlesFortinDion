@@ -18,10 +18,27 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/userListFragment" />
+        <action
+            android:id="@+id/action_userListFragment_to_locationListFragment"
+            app:destination="@id/locationListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/userListFragment" />
     </fragment>
     <fragment
         android:id="@+id/createUserFragment"
         android:name="com.example.lab6.ui.CreateUserFragment"
         android:label="ajout contact"
         tools:layout="@layout/fragment_create_user" />
+    <fragment
+        android:id="@+id/locationListFragment"
+        android:name="com.example.lab6.ui.LocationListFragment"
+        android:label="Locations"
+        tools:layout="@layout/fragment_location_list" >
+        <argument
+            android:name="userId"
+            app:argType="long" />
+    </fragment>
 </navigation>
