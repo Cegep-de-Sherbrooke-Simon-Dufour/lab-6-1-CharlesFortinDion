@@ -9,68 +9,44 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-    private String nom;
-    private String email;
-    private ArrayList<Item> items = new ArrayList<Item>(Arrays.asList(
-            new Item("Bob", "bobestcool@gmail.com"),
-            new Item("Alice", "ACC@gmail.com"),
-            new Item("Bob", "bobestcool@gmail.com"),
-            new Item("Alice", "ACC@gmail.com"),
-            new Item("Bob", "bobestcool@gmail.com")
-    ));
+    //private ViewModelUser viewModelUser;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ViewModelDemo viewModel = newe ViewModelProvider(this).get(ViewModelDemo.class)
+        setSupportActionBar(findViewById(R.id.toolbar));
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        UserAdapter adapter = new UserAdapter(items);
-        adapter.submitList(new ArrayList<Item>(items));
-        recyclerView.setAdapter(adapter);
+        NavHostFragment navHostFragment = (NavHostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+        }
+        NavigationUI.setupActionBarWithNavController(this, navController);
 
-        FloatingActionButton addButton = findViewById(R.id.addButton);
-        addButton.setOnClickListener(ajouterUser);
     }
 
-    ActivityResultLauncher<Intent> getNewUser = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult> () {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    Intent data = result.getData();
-                    if (result.getResultCode() != 0) {
-                        nom = data.getStringExtra("nom");
-                        email = data.getStringExtra("email");
-                        items.add(new Item(nom, email));
-
-                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                        UserAdapter adapter = new UserAdapter(items);
-                        adapter.submitList(new ArrayList<Item>(items));
-                        recyclerView.setAdapter(adapter);
-                    }
-        }
+    @Override
+    public boolean onSupportNavigateUp() {
+        navController.navigateUp();
+        return super.onSupportNavigateUp();
     }
-    );
-
-    View.OnClickListener ajouterUser = new View.OnClickListener () {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, CreateUser.class);
-            getNewUser.launch(intent);
-        }
-    };
 }

@@ -1,10 +1,10 @@
 package com.example.lab6;
 
-public class Item {
+public class User {
     private String nom;
     private String email;
 
-    public Item(String nom, String email) {
+    public User(String nom, String email) {
         this.nom = nom;
         this.email = email;
     }
