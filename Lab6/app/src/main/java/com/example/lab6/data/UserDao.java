@@ -16,7 +16,7 @@ public interface UserDao {
     LiveData<List<User>> getAll();
 
     @Query("SELECT * FROM users WHERE userId = :i")
-    User getUser(int i);
+    LiveData<User> getUser(int i);
 
     @Query("SELECT * FROM locations")
     LiveData<List<Location>> getLocations();

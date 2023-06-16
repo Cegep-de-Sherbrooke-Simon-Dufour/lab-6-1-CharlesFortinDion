@@ -46,16 +46,18 @@ public class LocationListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         adapter.setCallback(viewModelUser::deleteLocation);
 
-        int userId = getArguments().getInt("userId");
+        long userId = getArguments().getLong("userId");
 
-        User user = viewModelUser.getUser(userId);
-        TextView nomUser = view.findViewById(R.id.nomLocation);
+        User user = viewModelUser.getUser((int)userId);
+        TextView nomUser = view.findViewById(R.id.UserName);
+        TextView emailUser = view.findViewById(R.id.UserAdress);
         nomUser.setText(user.getNom());
+        emailUser.setText(user.getEmail());
 
         Button soumettreButton = view.findViewById(R.id.AjouterNewLocation);
         soumettreButton.setOnClickListener(v -> {
             EditText nom = view.findViewById(R.id.nomEditLocation);
-            viewModelUser.addLocation(nom.getText().toString(), userId);
+            viewModelUser.addLocation(nom.getText().toString(), (int)userId);
             Navigation.findNavController(view).navigateUp();
         });
 

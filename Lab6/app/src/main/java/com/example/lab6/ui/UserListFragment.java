@@ -45,6 +45,7 @@ public class UserListFragment extends Fragment {
         adapter.setCallback((user) -> {
             Bundle bundle = new Bundle();
             bundle.putLong("userId", user.getUserId());
+            System.out.println(user.getUserId());
             Navigation.findNavController(view).navigate(R.id.action_userListFragment_to_locationListFragment, bundle);
         });
 

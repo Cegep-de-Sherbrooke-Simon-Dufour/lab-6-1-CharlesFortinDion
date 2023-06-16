@@ -41,10 +41,9 @@ public class RepositoryUser {
     }
 
     public User getUser(int key) {
-        User user;
-        Executors.newSingleThreadExecutor().execute(() -> {
-            return userDao.getUser(key);}
-        });
+        LiveData<User> user = userDao.getUser(key);
+        return user.getValue();
+    }
 
     public LiveData<List<Location>> getLocations() {return locations;}
 

@@ -9,6 +9,7 @@ import com.example.lab6.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -34,7 +35,12 @@ public class ViewModelUser extends ViewModel {
     }
 
     public User getUser(int key) {
-        return repository.getUser(key);
+        for (User user : Objects.requireNonNull(repository.getUsers().getValue())) {
+            if (user.getUserId() == key) {
+                return user;
+            }
+        }
+        return null;
     }
     public LiveData<List<Location>> getLocations() { return repository.getLocations(); }
     // à completer
