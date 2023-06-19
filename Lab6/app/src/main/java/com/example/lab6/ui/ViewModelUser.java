@@ -44,7 +44,7 @@ public class ViewModelUser extends ViewModel {
     }
     public LiveData<List<Location>> getLocations() { return repository.getLocations(); }
     // à completer
-    public void addLocation(String nom, int userId) { repository.addLocation(new Location(nom, 1));}
+    public void addLocation(String nom, int userId) { repository.addLocation(new Location(nom, userId));}
     public void deleteLocation(Location location) {
         repository.deleteLocation(location);
     }

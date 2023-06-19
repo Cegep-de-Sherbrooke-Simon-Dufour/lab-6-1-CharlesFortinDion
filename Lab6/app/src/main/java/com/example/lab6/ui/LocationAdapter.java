@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.lab6.R;
 import com.example.lab6.data.Location;
 
-public class LocationAdapter extends ListAdapter<Location, LocationAdapter.ViewHolder> {
+public class LocationAdapter extends ListAdapter<Location, LocationAdapter.LocationViewHolder> {
     RecyclerCallback<Location> callback = (u) -> {};
 
     public void setCallback(RecyclerCallback<Location> callback) {
@@ -35,24 +35,24 @@ public class LocationAdapter extends ListAdapter<Location, LocationAdapter.ViewH
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_item, parent, false);
-        return new ViewHolder(view);
+                .inflate(R.layout.recycler_location, parent, false);
+        return new LocationViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LocationViewHolder holder, int position) {
         holder.setItem(getItem(position));
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class LocationViewHolder extends RecyclerView.ViewHolder {
         private final TextView nom;
         private Location location;
 
-        public ViewHolder(@NonNull View itemView) {
+        public LocationViewHolder(@NonNull View itemView) {
             super(itemView);
-            nom = itemView.findViewById(R.id.nomLocation);
+             nom = itemView.findViewById(R.id.nomLocation);
             itemView.setOnClickListener(view -> {
                 callback.onClick(location);
             });

@@ -53,7 +53,7 @@ public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nom = itemView.findViewById(R.id.nomLocation);
+            nom = itemView.findViewById(R.id.userName);
             email = itemView.findViewById(R.id.email);
             itemView.setOnClickListener(view -> {
                 callback.onClick(user);

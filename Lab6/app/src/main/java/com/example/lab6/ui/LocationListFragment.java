@@ -58,6 +58,11 @@ public class LocationListFragment extends Fragment {
         soumettreButton.setOnClickListener(v -> {
             EditText nom = view.findViewById(R.id.nomEditLocation);
             viewModelUser.addLocation(nom.getText().toString(), (int)userId);
+        });
+
+        Button supprimer = view.findViewById(R.id.Supprimer);
+        supprimer.setOnClickListener(v -> {
+            viewModelUser.deleteUser(user);
             Navigation.findNavController(view).navigateUp();
         });
 

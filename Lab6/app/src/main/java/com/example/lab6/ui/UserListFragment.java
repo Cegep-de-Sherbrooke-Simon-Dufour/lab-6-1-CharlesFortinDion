@@ -41,7 +41,6 @@ public class UserListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         UserAdapter adapter = new UserAdapter();
         recyclerView.setAdapter(adapter);
-        adapter.setCallback(viewModelUser::deleteUser);
         adapter.setCallback((user) -> {
             Bundle bundle = new Bundle();
             bundle.putLong("userId", user.getUserId());
