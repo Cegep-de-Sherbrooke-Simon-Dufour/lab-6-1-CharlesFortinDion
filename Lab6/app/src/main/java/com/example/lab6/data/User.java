@@ -15,9 +15,13 @@ public class User {
     @ColumnInfo(name = "email")
     private String email;
 
-    public User(String nom, String email) {
+    @ColumnInfo(name = "uri")
+    private String uri;
+
+    public User(String nom, String email, String uri) {
         this.nom = nom;
         this.email = email;
+        this.uri = uri;
     }
     public int getUserId() { return userId;}
     public void setUserId(int userId) { this.userId = userId;}
@@ -36,5 +40,13 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

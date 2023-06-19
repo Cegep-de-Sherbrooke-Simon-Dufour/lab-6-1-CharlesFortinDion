@@ -22,8 +22,8 @@ public class ViewModelUser extends ViewModel {
     public ViewModelUser(RepositoryUser repository) {
         this.repository = repository;
     }
-    public void addUser(String nom, String email) {
-        repository.addUser(new User(nom, email));
+    public void addUser(String nom, String email, String uri) {
+        repository.addUser(new User(nom, email, uri));
     }
 
     public void deleteUser(User user) {

@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.LocationListFragment" >
 
+    <ImageView
+        android:id="@+id/UserPic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
     <Button
         android:id="@+id/Supprimer"
         android:layout_width="wrap_content"
@@ -20,23 +28,23 @@
         android:id="@+id/UserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
         android:text="TextView"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/UserPic"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/UserAdress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
         android:text="TextView"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/UserPic"
         app:layout_constraintTop_toBottomOf="@+id/UserName" />
 
     <LinearLayout
