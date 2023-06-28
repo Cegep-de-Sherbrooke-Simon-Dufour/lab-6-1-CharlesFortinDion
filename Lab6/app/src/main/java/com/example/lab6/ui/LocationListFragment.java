@@ -1,5 +1,6 @@
 package com.example.lab6.ui;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lab6.R;
@@ -24,6 +26,7 @@ import com.example.lab6.data.User;
 
 import org.w3c.dom.Text;
 
+import java.net.URI;
 import java.util.List;
 
 public class LocationListFragment extends Fragment {
@@ -40,19 +43,23 @@ public class LocationListFragment extends Fragment {
 
         ViewModelUser viewModelUser = new ViewModelProvider(requireActivity()).get(ViewModelUser.class);
 
+
         RecyclerView recyclerView = view.findViewById(R.id.RecyclerLocations);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         LocationAdapter adapter = new LocationAdapter();
         recyclerView.setAdapter(adapter);
         adapter.setCallback(viewModelUser::deleteLocation);
 
+        assert getArguments() != null;
         long userId = getArguments().getLong("userId");
 
         User user = viewModelUser.getUser((int)userId);
         TextView nomUser = view.findViewById(R.id.UserName);
         TextView emailUser = view.findViewById(R.id.UserAdress);
+        ImageView userImage = view.findViewById(R.id.UserPic);
         nomUser.setText(user.getNom());
         emailUser.setText(user.getEmail());
+        userImage.setImageURI(Uri.parse(user.getUri()));
 
         Button soumettreButton = view.findViewById(R.id.AjouterNewLocation);
         soumettreButton.setOnClickListener(v -> {

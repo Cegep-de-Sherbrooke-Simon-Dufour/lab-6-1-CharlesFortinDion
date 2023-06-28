@@ -1,8 +1,10 @@
 package com.example.lab6.ui;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,12 +51,15 @@ public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView nom;
         private final TextView email;
+        private final ImageView userImage;
+
         private User user;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nom = itemView.findViewById(R.id.userName);
             email = itemView.findViewById(R.id.email);
+            userImage = itemView.findViewById(R.id.profilePic);
             itemView.setOnClickListener(view -> {
                 callback.onClick(user);
             });
@@ -63,6 +68,9 @@ public class UserAdapter extends ListAdapter<User, UserAdapter.ViewHolder> {
         public void setItem(User user) {
             nom.setText(user.getNom());
             email.setText(user.getEmail());
+            if (!user.getUri().isEmpty()) {
+                userImage.setImageURI(Uri.parse(user.getUri()));
+            }
             this.user = user;
         }
     }
